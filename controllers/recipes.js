@@ -5,7 +5,6 @@ const Recipe = require('../models/recipes')
 
 //Index route
 router.get('/', (req, res) => {
-    //Loop through users recipes and find in the data base to display on index
     Recipe.find({}, (err, foundRecipe, next) => {
         if (err) {
             console.log(err)
@@ -58,7 +57,6 @@ router.post('/', (req, res) => {
         if (err) {
             console.log(err)
         } else {
-
             //TODO Redirect to show page 
             res.redirect('/recipes')
         }
