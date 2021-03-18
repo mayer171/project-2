@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/users');
 const bcrypt = require('bcrypt');
-const User = require('../models/users')
 
-router.get('/new,', (req, res) => {
-    res.render('/sessions/new.ejs', { currentUser: req.session.currentUser })
+router.get('/new', (req, res) => {
+    res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
 })
 
 router.post('/', (req, res) => {
@@ -13,13 +13,12 @@ router.post('/', (req, res) => {
             res.send(err)
         } else {
             if (foundUser) {
-                console.log(foundUser)
                 if (bcrypt.compareSync(req.body.password, foundUser.password)){
                     req.session.currentUser = foundUser
                     res.redirect('/recipes')
                 } else {
                     //TODO Style invalid password response 
-                    res.send("<h1>wrong password idiot</>")
+                    res.send("<h1>wrong password</>")
                 }
             } else {
                 res.send("<h1>user not found</>")

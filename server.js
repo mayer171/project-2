@@ -44,16 +44,19 @@ const isAuthenticated = (req, res, next) => {
 //Controllers go here 
 
 const recipeControllers = require('./controllers/recipes')
-app.use('/recipes', isAuthenticated, recipeControllers)
+app.use('/recipes', isAuthenticated, recipeControllers);
 
 const userControllers = require('./controllers/users')
-app.use('/users', isAuthenticated, userControllers)
+app.use('/users', userControllers);
 
-const sessionsController = require('./controllers/sessions')
-app.use('/session', sessionsController)
+const sessionsControllers = require('./controllers/sessions')
+app.use('/sessions', sessionsControllers);
 
-app.get('/users/new', (req, res) => {
-    res.render('./users/new.ejs')
+app.get('/', (req, res) => {
+    res.render('home.ejs', {
+        currentUser: req.session.currentUser
+    })
+    console.log(currentUser)
 })
 
 app.listen(PORT, () => {
