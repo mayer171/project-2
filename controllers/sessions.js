@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
             if (foundUser) {
                 if (bcrypt.compareSync(req.body.password, foundUser.password)){
                     req.session.currentUser = foundUser
-                    res.redirect('/recipes')
+                    res.redirect('/cheatsheets')
                 } else {
                     //TODO Style invalid password response 
                     res.send("<h1>wrong password</>")

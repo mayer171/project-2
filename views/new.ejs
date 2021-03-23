@@ -1,8 +1,24 @@
 
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/nav.ejs') %>
+<div class="form">
+    <form action="/cheatsheets" method="POST">
+      <div class='form-input'>
+        <input type="text" name="name" placeholder="Cheat Sheet Name"/>
+      </div>
+      <div class='form-input'>
+        <input type="text" name="image" placeholder="ImageURL"/>
+      </div>
+      <div  class='form-input'>
+        <textarea name="description" rows="6" cols="41" placeholder="Description"></textarea>
+      </div>
+      <div class='form-input'>
+        <input type='text' name="ofTags" placeholder="tags"/>
+      </div>
+      <div class='form-input'> 
+        <button class='button' type="submit" value="Submit">Create New Item</button>
+      </div>
+    </form>
+  </div>
 
-<body>
-    <h1>New Page</h1>
-</body>
 </html>

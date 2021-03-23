@@ -8,6 +8,7 @@ router.get('/new', (req, res) => {
     res.render('users/new.ejs', { currentUser: req.session.currentUser} )
 })
 
+
 //Create User Route 
 router.post('/', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
@@ -20,7 +21,7 @@ router.post('/', (req, res) => {
             } 
         } else {
             req.session.currentUser = createdUser;
-            res.redirect('/recipes')
+            res.redirect('/cheatsheets')
         }
     })
 })

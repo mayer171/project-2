@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const Recipe = require('../models/recipes')
+const CheatSheet = require('../models/cheatsheets')
 
 //Index route
 router.get('/', (req, res) => {
-    Recipe.find({}, (err, foundRecipe, next) => {
+    CheatSheet.find({}, (err, foundSheets, next) => {
         if (err) {
             console.log(err)
             next(err)
         } else {
             res.render('index.ejs', {
-                recipe: foundRecipe,
+                sheets: foundSheets,
                 currentUser: req.session.currentUser
             })
         }
@@ -25,49 +25,61 @@ router.get('/new', (req, res) => {
 
 //Seed route 
 router.get('/seed', (req, res) => {
-    Recipe.create([
+    CheatSheet.create([
         {
-            name: 'recipe xyz'
+            name: 'Vim',
+            image: 'http://www.viemu.com/vi-vim-cheat-sheet.gif',
+            ofTags: ['cli', 'vim', 'editor'],
         },
         {
-            name: 'recipe abc'
-        }
+            name: 'Git',
+            image: 'https://intellipaat.com/mediaFiles/2019/03/Git-Cheat-Sheet.jpg',
+            ofTags: ['version controll', 'cli'],
+        },
+        {
+            name: 'Python',
+            image: 'https://hakin9.org/wp-content/uploads/2020/02/beginnersPythonCheatSheet-01.jpg',
+            ofTags: ['Python'],
+        },
+
     ], (err, data) => {
         if (err) {
             console.log(err)
         } else {
-            res.redirect('/recipes')
+            res.redirect('/cheatsheets')
         }
     })
 })
 
 //Show Route
 router.get('/:id', (req, res) => {
-    Recipe.findById(req.params.id, (err, foundRecipe) => {
+    CheatSheet.findById(req.params.id, (err, foundSheet) => {
         res.render('show.ejs', {
-            recipe: foundRecipe,
+            sheet: foundSheet,
             currentUser: req.session.currentUser
         })
     })
 })
 
-//Post route - Create Recipes
+//Post route - Create CheatSheets
+
 router.post('/', (req, res) => {
-    Recipe.create(req.body, (error, createdRecipe) => {
+    CheatSheet.create(req.body, (err, createdCheatSheet) => {
         if (err) {
             console.log(err)
+            
         } else {
             //TODO Redirect to show page 
-            res.redirect('/recipes')
+            res.redirect('/cheatsheets')
         }
     })
 })
 
 //Edit Route
 router.get('/:id/edit', (req, res) => {
-    Recipe.findById(req.params.id, (err, foundRecipe) => {
+    CheatSheet.findById(req.params.id, (err, foundSheet) => {
         res.render('edit.ejs'), {
-            recipe: foundRecipe,
+            sheet: foundSheet,
             currentUser: req.session.currentUser
         }
     })
@@ -75,9 +87,9 @@ router.get('/:id/edit', (req, res) => {
 
 //Update Route 
 router.put('/:id', (req, res) => {
-    Recipe.findOneAndUpdate(req.params.id, req.body, { new: true}, (err, updatedRecipe))
+    CheatSheet.findOneAndUpdate(req.params.id, req.body, { new: true}, (err, updatedCheatSheet))
     //TODO Redirect to show page 
-    res.redirect('/recipes')
+    res.redirect('/cheatsheets')
 })
 
 module.exports = router;

@@ -2,11 +2,26 @@
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/nav.ejs') %>
 <body>
-    <h1>Index Page</h1>
-    <div>item 
-        <a href="/recipes/show">show</a>
-        <a href="/recipes/edit">edit</a>
+    <h1>Cheat Sheets</h1>
+    <div id='sheet-container'>
+            <% for( let i = 0; i < sheets.length; i++ ) { %>
+                <div class='card'>
+                    <div class='card-header'>
+                        <%=sheets[i].name%>
+                    </div>
+                    <figure >
+                        <a href='/cheatsheets/<%=sheets[i].id%>'>
+                            <img class='card-img-top'src='<%= sheets[i].image %>'>
+                        </a>
+                    </figure>
+                    <div class='card-content'>
 
+                    </div>
+                    <div class="card-footer">
+                        <%= sheets[i].ofTags %>
+                    </div> 
+                </div>
+            <% } %>
     </div>
 </body>
-</html>
+</html> 

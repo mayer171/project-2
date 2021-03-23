@@ -6,6 +6,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
+
 app.use(methodOverride('_method'));
 
 const mongoURI = process.env.MONGODBURI
@@ -39,18 +40,17 @@ const isAuthenticated = (req, res, next) => {
         res.redirect('/sessions/new')
     }
 }
-
-
 //Controllers go here 
 
-const recipeControllers = require('./controllers/recipes')
-app.use('/recipes', isAuthenticated, recipeControllers);
+const cheatsheetControllers = require('./controllers/cheatsheets')
+app.use('/cheatsheets', isAuthenticated, cheatsheetControllers);
 
 const userControllers = require('./controllers/users')
 app.use('/users', userControllers);
 
 const sessionsControllers = require('./controllers/sessions')
 app.use('/sessions', sessionsControllers);
+
 
 app.get('/', (req, res) => {
     res.render('home.ejs', {
