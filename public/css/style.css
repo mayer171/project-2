@@ -1,9 +1,48 @@
 .card {
     width: 18rem;
+    margin: 1rem;
+}
+
+.page-title {
+    margin-left: 2rem;
 }
 
 #sheet-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
     display: flex;
     flex-direction: row;
-    
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+}
+
+.card-header {
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    align-items: center; 
+}
+
+.card-figure {
+    display: flex;
+    height: 14rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.tags {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    font-size: small;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
 }

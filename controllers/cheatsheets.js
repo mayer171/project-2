@@ -5,7 +5,7 @@ const CheatSheet = require('../models/cheatsheets')
 
 //Index route
 router.get('/', (req, res) => {
-    CheatSheet.find({}, (err, foundSheets, next) => {
+    CheatSheet.find({user: req.session.currentUser}, (err, foundSheets, next) => {
         if (err) {
             console.log(err)
             next(err)
@@ -30,16 +30,19 @@ router.get('/seed', (req, res) => {
             name: 'Vim',
             image: 'http://www.viemu.com/vi-vim-cheat-sheet.gif',
             ofTags: ['cli', 'vim', 'editor'],
+            user: req.session.currentUser,
         },
         {
             name: 'Git',
             image: 'https://intellipaat.com/mediaFiles/2019/03/Git-Cheat-Sheet.jpg',
             ofTags: ['version controll', 'cli'],
+            user: req.session.currentUser,
         },
         {
             name: 'Python',
             image: 'https://hakin9.org/wp-content/uploads/2020/02/beginnersPythonCheatSheet-01.jpg',
             ofTags: ['Python'],
+            user: req.session.currentUser,
         },
 
     ], (err, data) => {
@@ -78,10 +81,11 @@ router.post('/', (req, res) => {
 //Edit Route
 router.get('/:id/edit', (req, res) => {
     CheatSheet.findById(req.params.id, (err, foundSheet) => {
-        res.render('edit.ejs'), {
+        console.log(foundSheet)
+        res.render('edit.ejs', {
             sheet: foundSheet,
-            currentUser: req.session.currentUser
-        }
+            currentUser: req.session.currentUser,
+        })
     })
 })
 
@@ -92,5 +96,11 @@ router.put('/:id', (req, res) => {
     res.redirect('/cheatsheets')
 })
 
+//Delete Route 
+router.delete('/:id', (req, res) => {
+    CheatSheet.findByIdAndDelete(req.params.id, (err) => {
+        res.redirect('/cheatsheets')
+    })
+})
 module.exports = router;
 

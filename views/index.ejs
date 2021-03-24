@@ -1,27 +1,30 @@
-
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/nav.ejs') %>
-<body>
-    <h1>Cheat Sheets</h1>
-    <div id='sheet-container'>
-            <% for( let i = 0; i < sheets.length; i++ ) { %>
-                <div class='card'>
-                    <div class='card-header'>
-                        <%=sheets[i].name%>
-                    </div>
-                    <figure >
-                        <a href='/cheatsheets/<%=sheets[i].id%>'>
-                            <img class='card-img-top'src='<%= sheets[i].image %>'>
-                        </a>
-                    </figure>
-                    <div class='card-content'>
 
-                    </div>
-                    <div class="card-footer">
-                        <%= sheets[i].ofTags %>
-                    </div> 
+<body>
+    <h1 class='page-title'>Cheat Sheets</h1>
+    <div id='outer-container'>
+    <div id='sheet-container'>
+        <% for( let i = 0; i < sheets.length; i++ ) { %>
+            <div class='card'>
+                <div class='card-header'>
+                    <%=sheets[i].name%>
                 </div>
-            <% } %>
+                <figure class='card-figure'>
+                    <a href='/cheatsheets/<%=sheets[i].id%>'>
+                        <img class='card-img-top'src='<%= sheets[i].image %>'>
+                    </a>
+                </figure>
+                <div class="card-footer"> Tags:
+                    <div class='tags'>
+                        <% for( let j = 0; j < sheets[i].ofTags.length; j++ ) { %>
+                            <%= sheets[i].ofTags[j] %>,
+                        <% } %>
+                    </div>
+                </div> 
+            </div>
+        <% } %>
+    </div>
     </div>
 </body>
 </html> 

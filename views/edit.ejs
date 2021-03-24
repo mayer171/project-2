@@ -1,6 +1,31 @@
 <%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
 
 <body>
-    <h1>Index Page</h1>
+    <h1>Edit Page</h1>
+    <a class="card-footer-item">
+        <form method="POST" action='/cheatsheets/<%= sheet.id %>?_method=DELETE'>            
+              <button class='delete' type="submit" value="delete">delete</button>
+        </form>
+    </a>
+    <div class="form">
+        <form action="/cheatsheets/<%= sheet.id %>?_method=PUT" method="POST">
+          <div class='form-input'>
+            <input type="text" name="name" value="<%= sheet.name %> "/>
+          </div>
+          <div class='form-input'>
+            <input type="text" name="image" value=" <% sheet.image %>"/>
+          </div>
+          <div  class='form-input'>
+            <textarea name="description" rows="6" cols="41" value="<%= sheet.description%>"></textarea>
+          </div>
+          <div class='form-input'>
+            <input type='text' name="ofTags" value="<%= sheet.ofTags %>"/>
+          </div>
+          <div class='form-input'> 
+            <button class='button' type="submit" value="Submit">Update Cheat Sheet</button>
+          </div>
+        </form>
+    </div>
 </body>
 </html>

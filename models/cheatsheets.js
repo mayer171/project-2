@@ -7,7 +7,11 @@ const cheatSheetSchema = new Schema({
     name: {type: String, required: true},
     image: {type: String, required: true},
     description: {type: String, required: false},
-    ofTags: []
+    ofTags: [],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }
 })
 
 const CheatSheet = model('CheatSheet', cheatSheetSchema);

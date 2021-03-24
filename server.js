@@ -6,7 +6,6 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
-
 app.use(methodOverride('_method'));
 
 const mongoURI = process.env.MONGODBURI
@@ -54,9 +53,7 @@ app.use('/sessions', sessionsControllers);
 
 app.get('/', (req, res) => {
     res.render('home.ejs', {
-        currentUser: req.session.currentUser
     })
-    console.log(currentUser)
 })
 
 app.listen(PORT, () => {

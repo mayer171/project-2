@@ -1,9 +1,13 @@
-
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/nav.ejs') %>
 
 <body>
-    <h1><%= sheet.name %></h1>
-    <img src=<%= sheet.image %> >
+    <div class='title-container'>
+        <h1><%= sheet.name %></h1>
+        <a href='/cheatsheets/<%= sheet.id %>/edit'>Edit</a>
+    </div>
+    <div class="text-center zoom-within-container">
+        <img class='img-fluid' src=<%= sheet.image %> >
+    </div>
 </body>
-</html>
+</html> 
