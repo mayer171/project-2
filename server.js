@@ -52,10 +52,11 @@ app.use('/sessions', sessionsControllers);
 
 
 app.get('/', (req, res) => {
-    res.render('home.ejs', {
-    })
+    res.redirect('/users/new')
 })
 
 app.listen(PORT, () => {
     console.log(`Server listening on PORT ${PORT}`)
 })
+
+

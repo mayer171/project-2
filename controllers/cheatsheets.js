@@ -81,7 +81,6 @@ router.post('/', (req, res) => {
 //Edit Route
 router.get('/:id/edit', (req, res) => {
     CheatSheet.findById(req.params.id, (err, foundSheet) => {
-        console.log(foundSheet)
         res.render('edit.ejs', {
             sheet: foundSheet,
             currentUser: req.session.currentUser,
@@ -91,7 +90,7 @@ router.get('/:id/edit', (req, res) => {
 
 //Update Route 
 router.put('/:id', (req, res) => {
-    CheatSheet.findOneAndUpdate(req.params.id, req.body, { new: true}, (err, updatedCheatSheet))
+    CheatSheet.findOneAndUpdate(req.params.id, req.body, { new: true }, (err, updatedCheatSheet))
     //TODO Redirect to show page 
     res.redirect('/cheatsheets')
 })
@@ -102,5 +101,18 @@ router.delete('/:id', (req, res) => {
         res.redirect('/cheatsheets')
     })
 })
+//Search Route 
+router.get('/search?', (req, res) => {
+    req.send(req.query)
+    // CheatSheet.find({ ofTags: { $all: [req.query.tag]}}, (err, foundSheets) => {
+//     res.render('search.ejs', {
+//         sheets: foundSheets,
+//         currentUser: req.session.currentUser,
+//     })
+// })
+})
+
+
+
 module.exports = router;
 
